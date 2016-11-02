@@ -1,0 +1,35 @@
+group 'exerciese.querydsl'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.4.1.RELEASE'
+
+
+    //query dsl
+    def queryDSL = '3.7.4'  //nexus에 4.1.2가 있으나 4.1.2로 하면 디펜던시 안걸린다.
+    compile group: 'com.mysema.querydsl', name: 'querydsl-core', version:"$queryDSL"
+    compile group: 'com.mysema.querydsl', name: 'querydsl-jpa', version:"$queryDSL"
+    compile group: 'com.mysema.querydsl', name: 'querydsl-apt', version:"$queryDSL"
+
+
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+//query dsl
+sourceSets {
+    querydsl.java.srcDirs = ['src/main/querydsl']
+}
+
+apply from: 'config-querydsl.gradle'
